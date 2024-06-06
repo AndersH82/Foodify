@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ recipe.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="text-center flex-grow-1">{{ recipe.title }}</h1>
+                    <a href="{% url 'edit_recipe' recipe.id %}" class="btn btn-success ms-3">Edit Recipe</a>
+                </div>
+                {% if recipe.picture %}
+                    <img src="{{ recipe.picture.url }}" alt="{{ recipe.title }}" class="rounded-circle img-fluid mx-auto d-block" style="max-width: 50%;">
+                {% endif %}
+                <div class="text-center mb-4">
+                    {% if recipe.user.profile.picture %}
+                        <img src="{{ recipe.user.profile.picture.url }}" alt="{{ recipe.user.username }}" class="rounded-circle img-fluid" style="width: 100px; height: 100px;">
+                    {% endif %}
+                    <p>Recipe by: {{ recipe.user.username }}</p>
+                </div>
+                <div class="text-center mb-4">
+                    {% if recipe.owner.profile.picture %}
+                        <img src="{{ recipe.owner.profile.picture.url }}" alt="{{ recipe.owner.username }}" class="rounded-circle img-fluid" style="width: 100px; height: 100px;">
+                    {% endif %}
+                    <p>Owner: {{ recipe.owner.username }}</p>
+                </div>
+                <h3 class="text-center">Ingredients</h3>
+                <div class="text-center">
+                    {% for ingredient in recipe.ingredients %}
+                        <li>{{ ingredient }}</li>
+                    {% endfor %}
+                </div>
+                <h3 class="text-center">Preparation Time</h3>
+                <p class="text-center">{{ recipe.preparation_time }} minutes</p>
+                <h3 class="text-center">Cooking Time</h3>
+                <p class="text-center">{{ recipe.cooking_time }} minutes</p>
+                <h3 class="text-center">Instructions</h3>
+                <ol class="text-center">
+                    {% for step in recipe.instructions %}
+                        <li>{{ step }}</li>
+                    {% endfor %}
+                </ol>
+                <h3 class="text-center">Serving Size</h3>
+                <h3 class="text-center">Tips and Variations</h3>
+                <p class="text-center">{{ recipe.tips }}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

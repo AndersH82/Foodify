@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Recipes List</title>
+    </head>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between mb-3">
+            <h2>Recipes List</h2>
+            <a href="{% url 'add_recipe' %}" class="btn btn-success">Add Recipe</a>
+        </div>
+        <div class="row">
+            {% for recipe in recipes %}
+                <div class="col-md-2 mb-4">
+                    <div class="card">
+                        {% if recipe.picture %}
+                            <img src="{{ recipe.picture.url }}" alt="Recipe Picture" class="card-img-top">
+                        {% else %}
+                            <p>No recipe picture available.</p>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ recipe.title }}</h5>
+                            <p class="card-text">By: {{ recipe.user.username }}</p>
+                            {% if recipe.user.profile.picture %}
+                                <img src="{{ recipe.user.profile.picture.url }}" alt="User Picture" class="rounded-circle img-fluid" style="width: 50px; height: 50px;">
+                            {% endif %}
+                            <p class="card-text"><small class="text-muted">Posted on: {{ recipe.created_at }}</small></p>
+                            <a href="{% url 'recipe_detail' recipe_id=recipe.id %}" class="btn btn-primary">View Recipe</a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                    </div><div class="row">
+                {% endif %}
+            {% empty %}
+                <p>No Recipe Available</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
