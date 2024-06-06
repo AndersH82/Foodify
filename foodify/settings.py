@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@apba4)i_8uc$%de+0o_37cpmb&k(%52zn!lu1sc1ddnfyz)v!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['swefoodify-dd39213e100e.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
