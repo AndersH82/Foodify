@@ -4,8 +4,8 @@
 
 {% block content %}
     <head>
-        <meta charset="UTF-8">
-        <title>Recipes List</title>
+    <meta charset="UTF-8">
+    <title>Recipes List</title>  
     </head>
     <div class="container mt-5">
         <div class="d-flex justify-content-between mb-3">
@@ -15,20 +15,19 @@
         <div class="row">
             {% for recipe in recipes %}
                 <div class="col-md-2 mb-4">
-                    <div class="card">
+                    <div class="card" onclick="window.location.href='{% url 'recipe_detail' recipe_id=recipe.id %}'">
                         {% if recipe.picture %}
-                            <img src="{{ recipe.picture.url }}" alt="Recipe Picture" class="card-img-top">
+                            <img src="{{ recipe.picture.url }}" alt="{{ recipe.title }}" class="rounded-circle img-fluid mx-auto d-block" style="max-width: 50%;">
                         {% else %}
-                            <p>No recipe picture available.</p>
+                            <img src="{% static 'images/recipe.jpg' %}" alt="Default Recipe Image" class="rounded-circle img-fluid mx-auto d-block" style="max-width: 50%;">
                         {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ recipe.title }}</h5>
-                            <p class="card-text">By: {{ recipe.user.username }}</p>
                             {% if recipe.user.profile.picture %}
                                 <img src="{{ recipe.user.profile.picture.url }}" alt="User Picture" class="rounded-circle img-fluid" style="width: 50px; height: 50px;">
                             {% endif %}
-                            <p class="card-text"><small class="text-muted">Posted on: {{ recipe.created_at }}</small></p>
-                            <a href="{% url 'recipe_detail' recipe_id=recipe.id %}" class="btn btn-primary">View Recipe</a>
+                            <p class="card-text">{{ recipe.user.username }}</p>
+                            <p class="card-text"><small class="text-muted">{{ recipe.created_at|date:"d M Y" }}</small></p>
                         </div>
                     </div>
                 </div>

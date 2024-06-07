@@ -18,7 +18,7 @@
             <div class="row justify-content-center">
                 {% for profile in profiles %}
                     <div class="col-md-2 mb-4 d-flex align-items-stretch">
-                        <div class="card w-100">
+                        <div class="card w-100" onclick="window.location.href='{% url 'profile' profile.user.id %}'">
                             {% if profile.picture %}
                                 <img src="{{ profile.picture.url }}" alt="Profile Picture" class="card-img-top ">
                             {% else %}
@@ -26,7 +26,6 @@
                             {% endif %}
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{{ profile.user.username }}</h5>
-                                <a href="{% url 'profile' profile.user.id %}" class="btn btn-primary mt-auto">View Profile</a>
                             </div>
                         </div>
                     </div>

@@ -12,6 +12,10 @@
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </form>
+        <form method="post" action="{% url 'delete_profile' %}" onsubmit="return confirm('Are you sure you want to delete your profile? This action cannot be undone.');">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete Profile</button>
+        </form>
     </div>
 </div>
 {% endblock %}

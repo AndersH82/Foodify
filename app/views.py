@@ -7,6 +7,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Login, Profile, Recipe
 from .forms import UserForm, ProfileForm, RecipeForm
 from django.contrib.auth import logout as auth_logout
+from django.contrib import messages
+from django.conf import settings
+import os
 
 def home(request):
     return render(request, 'home.html')
@@ -100,7 +103,7 @@ def recipe_detail(request, recipe_id):
     return render(request, 'recipe.html', {'recipe': recipe})
 
 def recipes_list(request):
-    recipes = Recipe.objects.all()  # Fetch all recipes from the database
+    recipes = Recipe.objects.all()  
     return render(request, 'recipes_list.html', {'recipes': recipes})
 
 @login_required
@@ -109,7 +112,7 @@ def add_recipe(request):
         form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
             recipe = form.save(commit=False)
-            recipe.user = request.user  # Set the user to the currently logged-in user
+            recipe.user = request.user  
             recipe.save()
             return redirect('profile', user_id=request.user.id)
     else:
@@ -123,7 +126,7 @@ def edit_recipe(request, recipe_id):
         form = RecipeForm(request.POST, request.FILES, instance=recipe)
         if form.is_valid():
             form.save()
-            return redirect('home')  # Redirect to a success page or the recipe detail
+            return redirect('home')  
     else:
         form = RecipeForm(instance=recipe)
     return render(request, 'edit_recipe.html', {'form': form})
@@ -131,11 +134,20 @@ def edit_recipe(request, recipe_id):
 def logout_view(request):
     auth_logout(request)
     return redirect('home')
-   
+
+@login_required
+def delete_profile(request):
+    if request.method == 'POST':
+        user = request.user
+        user.delete()
+        messages.success(request, 'Your profile has been deleted successfully.')
+        return redirect('home')
+    return render(request, 'delete_profile.html')
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
+        Profile.objects.get_or_create(user=instance)
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):

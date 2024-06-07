@@ -6,9 +6,9 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-4 d-flex justify-content-center">
-            <div class="card" style="width: 12rem;">
+            <div class="profile" style="width: 12rem;">
                 {% if profile.picture %}
-                    <img src="{{ profile.picture.url }}" alt="Profile Picture" class="card-img-top">
+                    <img src="{{ profile.picture.url }}" alt="Profile Picture" class="card-img-top" id="profile-picture">
                 {% else %}
                     <p>No profile picture uploaded.</p>
                 {% endif %}
@@ -20,7 +20,7 @@
                     <p class="card-text">Phone Number: {{ profile.phone_number }}</p>
                     <p class="card-text">Address: {{ profile.address }}</p>
                     {% if user.is_authenticated and user == profile.user %}
-                    <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+                    <a href="{% url 'edit_profile' %}" class="edit btn btn-primary">Edit Profile</a>
                     {% endif %}
                 </div>
             </div>
@@ -32,18 +32,19 @@
                     <p class="card-text">This is a short bio about {{ profile.user.first_name }}. He/She is a software developer with a passion for creating amazing applications.</p>
                     {% if latest_recipes %}
                     <div class="latest-recipes mt-4">
-                        <h5 class="card-title">Latest Recipes</h5>
+                        <h5 class="card-title-latest">Latest Recipes</h5>
                         <div class="row">
                             {% for recipe in latest_recipes|slice:":4" %}
                             <div class="col-md-3">
-                                <div class="card mb-3">
+                                <div class="card mb-3" onclick="window.location.href='{% url 'recipe_detail' recipe.id %}'">
                                     {% if recipe.picture %}
-                                        <img src="{{ recipe.picture.url }}" alt="{{ recipe.title }}" class="card-img-top">
+                                        <img src="{{ recipe.picture.url }}" alt="{{ recipe.title }}" class="rounded-circle img-fluid mx-auto d-block" style="max-width: 50%;">
+                                    {% else %}
+                                        <img src="{% static 'images/recipe.jpg' %}" alt="Default Recipe Image" class="rounded-circle img-fluid mx-auto d-block" style="max-width: 50%;">
                                     {% endif %}
                                     <div class="card-body">
                                         <h5 class="card-title">{{ recipe.title }}</h5>
                                         <p class="card-text">{{ recipe.description }}</p>
-                                        <a href="{% url 'recipe_detail' recipe.id %}" class="btn btn-primary">View Recipe</a>
                                     </div>
                                 </div>
                             </div>

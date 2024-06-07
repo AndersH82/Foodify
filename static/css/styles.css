@@ -2,6 +2,10 @@ body {
     padding-top: 56px; 
 }
 
+.navbar {
+    background-color: aliceblue;
+}
+
 .centered-form {
     display: flex;
     justify-content: center;
@@ -11,4 +15,47 @@ body {
 .form-container {
     width: 100%;
     max-width: 500px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+}
+.card {
+    cursor: pointer;
+    background-color:aliceblue;
+    border: none;
+}
+
+.text-center.mb-4 {
+    margin-top: 50PX;
+}
+
+.card-title-latest{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+#profile-picture {
+    margin-bottom: 20px;
+}
+
+.profile {
+    background-color:aliceblue;
+    border-radius: 8px;
+    margin-top: 50px;
+}
+
+.edit {
+    margin-bottom: 20px;
+}
+
+img.card-img-top {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.recipe-owner {
+    margin-top: 20px;
 }
