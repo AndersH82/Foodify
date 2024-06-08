@@ -28,8 +28,8 @@
         <div class="col-md-8 d-flex justify-content-center align-items-center">
             <div class="container-bio">
                 <div class="card-body text-center">
-                    <h5 class="card-title">{{ profile.user.first_name }} {{ profile.user.last_name }}</h5>
-                    <p class="card-text">This is a short bio about {{ profile.user.first_name }}. He/She is a software developer with a passion for creating amazing applications.</p>
+                    <h5 class="card-title">{{ profile.user.username }}</h5>
+                    <p class="card-text">{{ profile.bio }}</p>
                     {% if latest_recipes %}
                     <div class="latest-recipes mt-4">
                         <h5 class="card-title-latest">Latest Recipes</h5>

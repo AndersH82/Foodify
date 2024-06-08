@@ -14,17 +14,17 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['username', 'first_name', 'last_name', 'phone_number', 'address', 'picture']
+        fields = ['username', 'first_name', 'last_name', 'phone_number', 'address', 'picture', 'bio']
 
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
-        if self.instance and hasattr(self.instance, 'user'):
-            self.fields['username'].initial = self.instance.user.username
-            self.fields['first_name'].initial = self.instance.user.first_name
-            self.fields['last_name'].initial = self.instance.user.last_name
-            self.fields['phone_number'].initial = self.instance.phone_number
-            self.fields['address'].initial = self.instance.address
-           
+        self.fields['username'].initial = self.instance.user.username
+        self.fields['first_name'].initial = self.instance.user.first_name
+        self.fields['last_name'].initial = self.instance.user.last_name
+        self.fields['phone_number'].initial = self.instance.phone_number
+        self.fields['address'].initial = self.instance.address
+        self.fields['bio'].initial = self.instance.bio
+
     def save(self, commit=True):
         profile = super(ProfileForm, self).save(commit=False)
         user = profile.user
@@ -35,7 +35,6 @@ class ProfileForm(forms.ModelForm):
             user.save()
             profile.save()
         return profile
-    
 
 class RecipeForm(forms.ModelForm):
     class Meta:

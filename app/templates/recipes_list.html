@@ -8,11 +8,11 @@
     <title>Recipes List</title>  
     </head>
     <div class="container mt-5">
-        <div class="d-flex justify-content-between mb-3">
+        <div class="d-flex justify-content-center mb-3">
             <h2>Recipes List</h2>
-            <a href="{% url 'add_recipe' %}" class="btn btn-success">Add Recipe</a>
+            
         </div>
-        <div class="row">
+        <div class="row justify-content-center">
             {% for recipe in recipes %}
                 <div class="col-md-2 mb-4">
                     <div class="card" onclick="window.location.href='{% url 'recipe_detail' recipe_id=recipe.id %}'">
@@ -21,7 +21,7 @@
                         {% else %}
                             <img src="{% static 'images/recipe.jpg' %}" alt="Default Recipe Image" class="rounded-circle img-fluid mx-auto d-block" style="max-width: 50%;">
                         {% endif %}
-                        <div class="card-body">
+                        <div class="card-body text-center">
                             <h5 class="card-title">{{ recipe.title }}</h5>
                             {% if recipe.user.profile.picture %}
                                 <img src="{{ recipe.user.profile.picture.url }}" alt="User Picture" class="rounded-circle img-fluid" style="width: 50px; height: 50px;">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 {% if forloop.counter|divisibleby:4 and not forloop.last %}
-                    </div><div class="row">
+                    </div><div class="row justify-content-center">
                 {% endif %}
             {% empty %}
                 <p>No Recipe Available</p>

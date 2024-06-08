@@ -9,7 +9,8 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=15, blank=True)
     address = models.CharField(max_length=255, blank=True)
     picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/profile.jpg')
-
+    bio = models.TextField(blank=True, default='This is a short bio about the user.')
+    
     def __str__(self):
         return self.user.username
 
