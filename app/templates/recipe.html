@@ -54,6 +54,45 @@
                 <h3 class="text-center">Serving Size</h3>
                 <h3 class="text-center">Tips and Variations</h3>
                 <p class="text-center">{{ recipe.tips }}</p>
+                <div class="text-center mb-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="like" class="btn btn-success">
+                            {% if user_liked %}
+                                <i class="fa-solid fa-heart"></i>
+                            {% else %}
+                                <i class="fa-regular fa-heart"></i>
+                            {% endif %}
+                            Like ({{ likes }})
+                        </button>
+                        <button type="submit" name="dislike" class="btn btn-danger">
+                            {% if user_disliked %}
+                                <i class="fa-solid fa-heart"></i>
+                            {% else %}
+                                <i class="fa-regular fa-heart"></i>
+                            {% endif %}
+                            Dislike ({{ dislikes }})
+                        </button>
+                    </form>
+                </div>
+                <h3 class="text-center">Comments</h3>
+                <div class="text-center mb-4">
+                    {% for comment in comments %}
+                        <div class="comment">
+                            <p><strong>{{ comment.user.username }}</strong>: {{ comment.text }}</p>
+                            <p><small>{{ comment.created_at }}</small></p>
+                        </div>
+                    {% empty %}
+                        <p>No comments yet.</p>
+                    {% endfor %}
+                </div>
+                <div class="text-center mb-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ comment_form.as_p }}
+                        <button type="submit" name="comment" class="btn btn-primary">Add Comment</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

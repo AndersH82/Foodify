@@ -4,9 +4,11 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.decorators import login_required
-from .models import Login, Profile, Recipe
-from .forms import UserForm, ProfileForm, RecipeForm
+from django.contrib.auth.forms import UserCreationForm
+from .models import Login, Profile, Recipe, Comment, LikeDislike
+from .forms import UserForm, ProfileForm, RecipeForm, CommentForm
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.conf import settings
 import os
@@ -24,7 +26,6 @@ def profiles_list(request):
     profiles = Profile.objects.all()
     return render(request, 'profiles_list.html', {'profiles': profiles})
 
-@login_required
 def edit_profile(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
@@ -43,7 +44,15 @@ def edit_profile(request):
     })
 
 def signup(request):
-    return render(request, 'signup.html')
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')  # Redirect to a home page or any other page
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
 
 def register(request):
     if request.method == 'POST':
@@ -56,6 +65,11 @@ def register(request):
         phone_number = request.POST.get('phone_number')
         address = request.POST.get('address')
         picture = request.FILES.get('picture')
+        facebook_url = request.POST.get('facebook_url')
+        instagram_url = request.POST.get('instagram_url')
+        youtube_url = request.POST.get('youtube_url')
+        twitter_url = request.POST.get('twitter_url')
+        linkedin_url = request.POST.get('linkedin_url')
 
         if User.objects.filter(username=username).exists():
             return render(request, 'signup.html', {'error': 'Username already exists'})
@@ -66,12 +80,16 @@ def register(request):
             user.last_name = last_name
             user.save()
             
-            # Profile creation is handled by the post_save signal
             profile, created = Profile.objects.get_or_create(user=user)
             if created:
                 profile.phone_number = phone_number
                 profile.address = address
                 profile.picture = picture
+                profile.facebook_url = facebook_url
+                profile.instagram_url = instagram_url
+                profile.youtube_url = youtube_url
+                profile.twitter_url = twitter_url
+                profile.linkedin_url = linkedin_url
                 profile.save()
             
             auth_login(request, user)
@@ -79,7 +97,7 @@ def register(request):
         else:
             return render(request, 'signup.html', {'error': 'Passwords do not match'})
     else:
-        return redirect('signup')
+        return render(request, 'signup.html')
     
 def login_view(request):
     if request.method == 'POST':
@@ -99,8 +117,38 @@ def login_view(request):
         return render(request, 'login.html')
 
 def recipe_detail(request, recipe_id):
-    recipe = Recipe.objects.get(id=recipe_id)
-    return render(request, 'recipe.html', {'recipe': recipe})
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    comments = recipe.comments.all()
+    likes = recipe.likes_dislikes.filter(is_like=True).count()
+    dislikes = recipe.likes_dislikes.filter(is_like=False).count()
+
+    if request.method == 'POST':
+        if 'comment' in request.POST:
+            comment_form = CommentForm(request.POST)
+            if comment_form.is_valid():
+                comment = comment_form.save(commit=False)
+                comment.user = request.user
+                comment.recipe = recipe
+                comment.save()
+                return redirect('recipe_detail', recipe_id=recipe.id)
+        elif 'like' in request.POST or 'dislike' in request.POST:
+            is_like = 'like' in request.POST
+            LikeDislike.objects.update_or_create(
+                user=request.user,
+                recipe=recipe,
+                defaults={'is_like': is_like}
+            )
+            return redirect('recipe_detail', recipe_id=recipe.id)
+    else:
+        comment_form = CommentForm()
+
+    return render(request, 'recipe.html', {
+        'recipe': recipe,
+        'comments': comments,
+        'likes': likes,
+        'dislikes': dislikes,
+        'comment_form': comment_form
+    })
 
 def recipes_list(request):
     recipes = Recipe.objects.all()  

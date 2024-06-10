@@ -14,11 +14,25 @@
                 {% endif %}
                 <div class="card-body text-center">
                     <h5 class="card-title">{{ profile.user.username }}'s Contact Information</h5>
-                    <p class="card-text">First Name: {{ profile.user.first_name }}</p>
-                    <p class="card-text">Last Name: {{ profile.user.last_name }}</p>
-                    <p class="card-text">Email: {{ profile.user.email }}</p>
-                    <p class="card-text">Phone Number: {{ profile.phone_number }}</p>
-                    <p class="card-text">Address: {{ profile.address }}</p>
+                    <p class="name card-text">First Name: {{ profile.user.first_name }}</p>
+                    <p class="name card-text">Last Name: {{ profile.user.last_name }}</p>
+                    <div class="social-media mt-3">
+                        {% if profile.facebook_url %}
+                            <a href="{{ profile.facebook_url }}" target="_blank" class="btn btn-outline-primary btn-sm"><i class="fab fa-facebook-f"></i></a>
+                        {% endif %}
+                        {% if profile.instagram_url %}
+                            <a href="{{ profile.instagram_url }}" target="_blank" class="btn btn-outline-danger btn-sm"><i class="fab fa-instagram"></i></a>
+                        {% endif %}
+                        {% if profile.youtube_url %}
+                            <a href="{{ profile.youtube_url }}" target="_blank" class="btn btn-outline-danger btn-sm"><i class="fab fa-youtube"></i></a>
+                        {% endif %}
+                        {% if profile.twitter_url %}
+                            <a href="{{ profile.twitter_url }}" target="_blank" class="btn btn-outline-info btn-sm"><i class="fab fa-twitter"></i></a>
+                        {% endif %}
+                        {% if profile.linkedin_url %}
+                            <a href="{{ profile.linkedin_url }}" target="_blank" class="btn btn-outline-primary btn-sm"><i class="fab fa-linkedin-in"></i></a>
+                        {% endif %}
+                    </div>
                     {% if user.is_authenticated and user == profile.user %}
                     <a href="{% url 'edit_profile' %}" class="edit btn btn-primary">Edit Profile</a>
                     {% endif %}

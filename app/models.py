@@ -6,11 +6,13 @@ from django.utils import timezone
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone_number = models.CharField(max_length=15, blank=True)
-    address = models.CharField(max_length=255, blank=True)
-    picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/profile.jpg')
-    bio = models.TextField(blank=True, default='This is a short bio about the user.')
-    
+    picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
+    facebook_url = models.URLField(blank=True, null=True)
+    instagram_url = models.URLField(blank=True, null=True)
+    youtube_url = models.URLField(blank=True, null=True)
+    twitter_url = models.URLField(blank=True, null=True)
+    linkedin_url = models.URLField(blank=True, null=True)
+
     def __str__(self):
         return self.user.username
 
@@ -45,3 +47,16 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, related_name='comments', on_delete=models.CASCADE)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class LikeDislike(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, related_name='likes_dislikes', on_delete=models.CASCADE)
+    is_like = models.BooleanField()
+    created_at = models.DateTimeField(auto_now_add=True)
