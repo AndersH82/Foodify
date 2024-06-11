@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-@apba4)i_8uc$%de+0o_37cpmb&k(%52zn!lu1sc1ddnfyz)v!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://swefoodify-dd39213e100e.herokuapp.com']
 
 
 # Set session to expire at browser close
