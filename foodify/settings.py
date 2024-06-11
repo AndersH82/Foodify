@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 # Set session to expire at browser close
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-
 # Application definition
 
 INSTALLED_APPS = [
