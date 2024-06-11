@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'foodify.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
+    'default': dj_database_url.config(default='postgres://ndnhwxdj:XzD9rAkq7HyMR3nqAHnjoAL63tzf6iu9@abul.db.elephantsql.com/ndnhwxdj')
 }
 
 # Password validation
