@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 {% extends 'base.html' %}
 {% load static %}
 
@@ -8,18 +7,17 @@
     <title>Recipes List</title>  
     </head>
     <div class="container mt-5">
-        <div class="d-flex justify-content-between mb-3">
+        <div class="d-flex justify-content-center mb-3">
             <h2>Recipes List</h2>
-            <a href="{% url 'add_recipe' %}" class="btn btn-success">Add Recipe</a>
         </div>
-        <div class="row">
+        <div class="row justify-content-center">
             {% for recipe in recipes %}
-                <div class="col-md-2 mb-4">
-                    <div class="card" onclick="window.location.href='{% url 'recipe_detail' recipe_id=recipe.id %}'">
+                <div class="col-md-2 mb-4 d-flex align-items-stretch">
+                    <div class="card text-center" onclick="window.location.href='{% url 'recipe_detail' recipe_id=recipe.id %}'">
                         {% if recipe.picture %}
-                            <img src="{{ recipe.picture.url }}" alt="{{ recipe.title }}" class="rounded-circle img-fluid mx-auto d-block" style="max-width: 50%;">
+                            <img id="recipe-picture" src="{{ recipe.picture.url }}" alt="{{ recipe.title }}" class="rounded-circle img-fluid mx-auto d-block" style="max-width: 50%;">
                         {% else %}
-                            <img src="{% static 'images/recipe.jpg' %}" alt="Default Recipe Image" class="rounded-circle img-fluid mx-auto d-block" style="max-width: 50%;">
+                            <img id="recipe-picture" src="{% static 'images/recipe.jpg' %}" alt="Default Recipe Image" class="rounded-circle img-fluid mx-auto d-block" style="max-width: 50%;">
                         {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ recipe.title }}</h5>
@@ -32,10 +30,10 @@
                     </div>
                 </div>
                 {% if forloop.counter|divisibleby:4 and not forloop.last %}
-                    </div><div class="row">
+                    </div><div class="row justify-content-center">
                 {% endif %}
             {% empty %}
-                <p>No Recipe Available</p>
+                <p class="text-center">No Recipe Available</p>
             {% endfor %}
         </div>
     </div>

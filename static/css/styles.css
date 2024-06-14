@@ -59,3 +59,28 @@ img.card-img-top {
 .recipe-owner {
     margin-top: 20px;
 }
+
+.card.text-center {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+#recipe-picture {
+    margin-top: 20px;
+}
+
+/* add recipe */
+
+.form-group label {
+    display: block;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+}
