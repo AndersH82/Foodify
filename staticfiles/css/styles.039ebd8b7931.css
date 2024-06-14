@@ -1,0 +1,95 @@
+body {
+    padding-top: 56px; 
+}
+
+.navbar {
+    background-color: aliceblue;
+}
+
+.centered-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+.form-container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+}
+.card {
+    cursor: pointer;
+    background-color:aliceblue;
+    border: none;
+}
+
+.text-center.mb-4 {
+    margin-top: 50PX;
+}
+
+.card-title-latest{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+#profile-picture {
+    margin-bottom: 20px;
+}
+
+.profile {
+    background-color:aliceblue;
+    border-radius: 8px;
+    margin-top: 50px;
+}
+
+.edit {
+    margin-bottom: 20px;
+}
+
+img.card-img-top {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.recipe-owner {
+    margin-top: 20px;
+}
+
+.card.text-center {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+#recipe-picture {
+    margin-top: 20px;
+}
+
+#bitebond-img {
+    margin-right: 10px;
+}
+
+#profile-picture {
+    margin-top: 20px;
+}
+
+/* add recipe */
+
+.form-group label {
+    display: block;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    border-radius: 20px;
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+}
