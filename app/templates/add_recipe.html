@@ -6,9 +6,40 @@
     <div class="row w-100 justify-content-center">
         <div class="col-md-8">
             <h1 class="mb-4 text-center">Add Recipe</h1>
-            <form method="post" enctype="multipart/form-data" class="text-center">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="mb-3">
+                    <label for="ingredients" class="form-label">Ingredients</label>
+                    <textarea class="form-control" id="ingredients" name="ingredients"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="instructions" class="form-label">Instructions</label>
+                    <textarea class="form-control" id="instructions" name="instructions"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="cooking_time" class="form-label">Cooking Time (minutes)</label>
+                    <input type="number" class="form-control" id="cooking_time" name="cooking_time">
+                </div>
+                <div class="mb-3">
+                    <label for="preparation_time" class="form-label">Preparation Time (minutes)</label>
+                    <input type="number" class="form-control" id="preparation_time" name="preparation_time">
+                </div>
+                <div class="mb-3">
+                    <label for="serving_size" class="form-label">Serving Size</label>
+                    <input type="number" class="form-control" id="serving_size" name="serving_size">
+                </div>
+                <div class="mb-3">
+                    <label for="tips" class="form-label">Tips</label>
+                    <textarea class="form-control" id="tips" name="tips"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="picture" class="form-label">Picture</label>
+                    <input type="file" class="form-control" id="picture" name="picture">
+                </div>
                 <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-primary">Save Recipe</button>
                 </div>

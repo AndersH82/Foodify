@@ -3,14 +3,47 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <h1 class="mb-4">Edit Recipe</h1>
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="row w-100 justify-content-center">
+        <div class="col-md-8">
+            <h1 class="mb-4 text-center">Edit Recipe</h1>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Update Recipe</button>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ form.title.value }}">
+                </div>
+                <div class="mb-3">
+                    <label for="ingredients" class="form-label">Ingredients</label>
+                    <textarea class="form-control" id="ingredients" name="ingredients">{{ form.ingredients.value }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="instructions" class="form-label">Instructions</label>
+                    <textarea class="form-control" id="instructions" name="instructions">{{ form.instructions.value }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="cooking_time" class="form-label">Cooking Time (minutes)</label>
+                    <input type="number" class="form-control" id="cooking_time" name="cooking_time" value="{{ form.cooking_time.value }}">
+                </div>
+                <div class="mb-3">
+                    <label for="preparation_time" class="form-label">Preparation Time (minutes)</label>
+                    <input type="number" class="form-control" id="preparation_time" name="preparation_time" value="{{ form.preparation_time.value }}">
+                </div>
+                <div class="mb-3">
+                    <label for="serving_size" class="form-label">Serving Size</label>
+                    <input type="number" class="form-control" id="serving_size" name="serving_size" value="{{ form.serving_size.value }}">
+                </div>
+                <div class="mb-3">
+                    <label for="tips" class="form-label">Tips</label>
+                    <textarea class="form-control" id="tips" name="tips">{{ form.tips.value }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="picture" class="form-label">Picture</label>
+                    <input type="file" class="form-control" id="picture" name="picture">
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Update Recipe</button>
+                </div>
             </form>
         </div>
     </div>
