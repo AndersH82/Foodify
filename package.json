@@ -9,7 +9,7 @@
   },
   "engines": {
     "npm": "8.0.0",
-    "node": "20.24.0"
+    "node": "20.14.0"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
