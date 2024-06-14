@@ -8,14 +8,17 @@
 <div class="container mt-5">
     <div class="row d-flex align-items-center">
         <div class="col-md-6 text-center text-md-left">
-            <h1>Welcome to Foodify</h1>
-            <p>Discover, share, and enjoy a world of delicious recipes. Whether you're a seasoned chef or a home cook, Foodify is your go-to platform for culinary inspiration. Join our community to explore new dishes, share your own creations, and connect with fellow food enthusiasts. Let's make cooking fun and accessible for everyone!</p>
-            <div class="mt-4">
-                {% if not user.is_authenticated %}
+            {% if user.is_authenticated %}
+                <h1>Welcome back to Bitebond {{ user.username }}!</h1>
+                <p> We're glad to see you again! Dive back into your favorite recipes, discover new ones, and continue sharing your culinary creations with our community. Let's keep the cooking fun and inspiring!</p>
+            {% else %}    
+                <h1>Welcome to Bitebond</h1>
+                <p>Discover, share, and enjoy a world of delicious recipes. Whether you're a seasoned chef or a home cook, Foodify is your go-to platform for culinary inspiration. Join our community to explore new dishes, share your own creations, and connect with fellow food enthusiasts. Let's make cooking fun and accessible for everyone!</p>
+                <div class="mt-4">
                     <a href="{% url 'signup' %}" class="btn btn-primary me-2">Sign Up</a>
                     <a href="{% url 'login' %}" class="btn btn-secondary">Log In</a>
-                {% endif %}
-            </div>
+                </div>
+            {% endif %}
         </div>
         <div class="col-md-6 d-flex justify-content-center">
             <img src="{% static 'images/meatdish.png' %}" alt="Meat Dish" class="img-fluid">
