@@ -73,6 +73,10 @@ img.card-img-top {
     margin-right: 10px;
 }
 
+#profile-picture {
+    margin-top: 20px;
+}
+
 /* add recipe */
 
 .form-group label {
