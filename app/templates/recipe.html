@@ -17,7 +17,7 @@
             <div class="col-12 col-md-10 col-lg-8">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h1 class="text-center flex-grow-1">{{ recipe.title }}</h1>
-                    <a href="{% url 'edit_recipe' recipe.id %}" class="btn btn-success ms-3">Edit Recipe</a>
+                    
                 </div>
                 {% if recipe.picture %}
                     <img src="{{ recipe.picture.url }}" alt="{{ recipe.title }}" class="rounded-circle img-fluid mx-auto d-block" style="max-width: 50%;">

@@ -48,8 +48,13 @@
         </li>
         {% endif %}
       </ul>
-      {% if user.is_authenticated%}
+      {% if user.is_authenticated %}
       <ul class="navbar-nav">
+        {% if recipe %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'edit_recipe' recipe.id %}">Edit Recipe</a>
+        </li>
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'add_recipe' %}">New Recipe</a>
         </li>
