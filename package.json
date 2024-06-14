@@ -4,7 +4,7 @@
   "description": "A Django web application for managing recipes and user-uploaded images",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "gunicorn foodify.wsgi --log-file -",
     "app": "node app.js"
   },
   "engines": {
