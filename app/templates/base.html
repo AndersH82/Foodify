@@ -76,33 +76,35 @@
     {% endblock %}
   </div>
 
-  <!-- Footer -->
-  <footer class="footer mt-auto py-3 bg-light fixed-bottom d-md-none">
-    <div class="container text-center">
-      <div class="row">
-        <div class="col">
-          <a href="{% url 'profile' user.id %}" class="text-dark">
-            <i class="fa-solid fa-user"></i>
-          </a>
-        </div>
-        <div class="col">
-          <a href="{% url 'profiles_list' %}" class="text-dark">
-            <i class="fa-solid fa-users"></i>
-          </a>
-        </div>
-        <div class="col">
-          <a href="{% url 'recipes_list' %}" class="text-dark">
-            <i class="fa-solid fa-book-open"></i>
-          </a>
-        </div>
-        <div class="col">
-          <a href="#" class="text-dark" data-bs-toggle="modal" data-bs-target="#searchModal">
-            <i class="fa-solid fa-search"></i>
-          </a>
-        </div>
+<!-- Footer -->
+<footer class="footer mt-auto py-3 bg-light fixed-bottom d-md-none">
+  <div class="container text-center">
+    <div class="row">
+      {% if user.is_authenticated %}
+      <div class="col">
+        <a href="{% url 'profile' user.id %}" class="text-dark">
+          <i class="fa-solid fa-user"></i>
+        </a>
       </div>
+      <div class="col">
+        <a href="{% url 'profiles_list' %}" class="text-dark">
+          <i class="fa-solid fa-users"></i>
+        </a>
+      </div>
+      <div class="col">
+        <a href="{% url 'recipes_list' %}" class="text-dark">
+          <i class="fa-solid fa-book-open"></i>
+        </a>
+      </div>
+      <div class="col">
+        <a href="#" class="text-dark" data-bs-toggle="modal" data-bs-target="#searchModal">
+          <i class="fa-solid fa-search"></i>
+        </a>
+      </div>
+      {% endif %}
     </div>
-  </footer>
+  </div>
+</footer>
 
   <!-- Search Modal -->
   <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">

@@ -12,7 +12,12 @@ from django.conf import settings
 import os
 
 def home(request):
-    return render(request, 'home.html')
+    if request.user.is_authenticated:
+        user_id = request.user.id
+        print(f"User ID: {user_id}")  # Debugging statement
+        return render(request, 'home.html', {'user_id': user_id})
+    else:
+        return render(request, 'home.html')
 
 def profile(request, user_id):
     user_profile = get_object_or_404(Profile, user__id=user_id)

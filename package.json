@@ -4,10 +4,12 @@
   "description": "A Django web application for managing recipes and user-uploaded images",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "app": "node app.js"
   },
   "engines": {
-    "npm": "8.0.0"
+    "npm": "8.0.0",
+    "node": "20.24.0"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
