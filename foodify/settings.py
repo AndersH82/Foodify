@@ -27,8 +27,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['https://swefoodify-dd39213e100e.herokuapp.com', '127.0.0.1']
 
-# Set session to expire at browser close
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Application definition
 
