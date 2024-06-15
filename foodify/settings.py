@@ -1,5 +1,7 @@
 from pathlib import Path
 import django_heroku
+import os
+from .env import BASE_DIR  # Import BASE_DIR from env.py
 
 """
 Django settings for foodify project.
@@ -13,20 +15,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@apba4)i_8uc$%de+0o_37cpmb&k(%52zn!lu1sc1ddnfyz)v!'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['swefoodify-dd39213e100e.herokuapp.com', '127.0.0.1']
-
 
 # Application definition
 
