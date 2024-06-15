@@ -1,22 +1,22 @@
 {
   "name": "foodify",
   "version": "1.0.0",
-  "description": "A Django web application for managing recipes and user-uploaded images",
+  "description": "A platform for users to discover, share, and manage recipes.",
   "main": "index.js",
   "scripts": {
-    "start": "gunicorn foodify.wsgi --log-file -",
-    "app": "node app.js"
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bootstrap": "^5.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "redux": "^4.1.0",
+    "react-redux": "^7.2.4"
   },
   "engines": {
-    "npm": "8.0.0",
-    "node": "20.14.0"
-  },
-  "dependencies": {
-    "bootstrap": "^5.3.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "axios": "^1.3.4",
-    "redux": "^4.2.1",
-    "react-redux": "^8.0.5"
+    "npm": "8.0.0"
   }
 }
