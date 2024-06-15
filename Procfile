@@ -1,1 +1,1 @@
-web: gunicorn foodify.wsgi --log-file -
+web: gunicorn foodify.wsgi
