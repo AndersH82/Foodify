@@ -1,7 +1,7 @@
 from pathlib import Path
 import django_heroku
 import os
-from .env import BASE_DIR  # Import BASE_DIR from env.py
+from .env import BASE_DIR 
 
 """
 Django settings for foodify project.
@@ -24,7 +24,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['swefoodify-dd39213e100e.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
