@@ -1,1 +1,1 @@
-web: gunicorn foodify.wsgi
+web: node index.js
